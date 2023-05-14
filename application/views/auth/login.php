@@ -61,6 +61,7 @@
                             </div>
                         </div>
                         <div class="mt-2 text-muted text-center">
+                            LOGIN DENGAN <br>
                             Email : admin@admin.com<br>
                             Pass : asdasdasd
                         </div>
