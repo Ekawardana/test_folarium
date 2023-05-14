@@ -39,7 +39,7 @@
                 type: "POST"
             },
             columns: [{
-                    "data": "id",
+                    "data": "id_pegawai",
                     "orderable": false,
                     "width": "20px"
                 },

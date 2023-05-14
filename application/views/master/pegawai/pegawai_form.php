@@ -28,7 +28,7 @@
                                     <?= form_error('gaji') ?>
                                 </div>
 
-                                <input type="hidden" name="id" value="<?= $id; ?>" />
+                                <input type="hidden" name="id_pegawai" value="<?= $id_pegawai; ?>" />
                                 <div class="text-right">
                                     <button type="submit" class="btn btn-primary">
                                         <i class="fas fa-<?= $button == "Tambah" ? "plus" : "pencil-alt" ?>">

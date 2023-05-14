@@ -24,9 +24,6 @@
         <script src="<?= base_url('assets') ?>/vendor/sweetalert2/dist/sweetalert2.all.min.js"></script>
         <script src="<?= base_url('assets') ?>/js/mysweet.js"></script>
 
-        <!-- Select2 -->
-        <script src="<?= base_url('assets') ?>/js/select2.min.js"></script>
-
         <!-- DataTables -->
         <script src="<?= base_url('assets/datatables/jquery.dataTables.min.js') ?>"></script>
         <script src="<?= base_url('assets/datatables/dataTables.bootstrap4.js') ?>"></script>

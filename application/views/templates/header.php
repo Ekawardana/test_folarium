@@ -14,9 +14,7 @@
     <link rel="stylesheet" href="<?= base_url('assets/datatables') ?>/dataTables.bootstrap4.css" />
     <link rel="stylesheet" href="<?= base_url('assets/datatables') ?>/dataTables.dateTime.min.css" />
     <link rel="stylesheet" href="<?= base_url('assets') ?>/css/components.css" />
-    <link rel="stylesheet" href="<?= base_url('assets') ?>/css/dropify.css" />
-    <link rel="stylesheet" href="<?= base_url('assets') ?>/css/select2.min.css" />
-    <link rel="stylesheet" href="<?= base_url('assets') ?>/css/select2.bootstrap.css" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@800&display=swap" rel="stylesheet">

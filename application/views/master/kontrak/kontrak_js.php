@@ -40,7 +40,7 @@
             bAutoWidth: false,
             oder: [],
             ajax: {
-                url: "<?= base_url('master/Jabatan/json') ?>",
+                url: "<?= base_url('master/Kontrak/json') ?>",
                 type: "POST"
             },
             columns: [{
@@ -49,13 +49,8 @@
                     "width": "20px"
                 },
                 {
-                    "data": "jabatan"
+                    "data": "id_pegawai"
                 },
-                {
-                    "data": "action",
-                    "orderable": false,
-                    "className": "text-center"
-                }
             ],
             order: [
                 [0, 'asc']

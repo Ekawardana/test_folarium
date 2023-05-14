@@ -60,7 +60,7 @@ class JabatanModel extends CI_Model
         return $this->db->get($this->table)->result();
     }
 
-    // insert data kategori
+    // insert data
     function insert($data)
     {
         $this->db->insert($this->table, $data);
@@ -73,14 +73,14 @@ class JabatanModel extends CI_Model
         return $this->db->get($this->table)->row();
     }
 
-    // update data Kategori
+    // update data
     function update($id, $data)
     {
         $this->db->where($this->id, $id);
         $this->db->update($this->table, $data);
     }
 
-    // delete data kategori
+    // delete data
     function delete($id)
     {
         $this->db->where($this->id, $id);
