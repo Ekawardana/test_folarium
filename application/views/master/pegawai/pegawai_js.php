@@ -1,6 +1,6 @@
+<script src="<?= base_url('assets') ?>/js/jquery-3.5.1.js"></script>
 <script src="<?= base_url('assets/datatables/jquery.dataTables.min.js') ?>"></script>
 <script src="<?= base_url('assets/datatables/dataTables.bootstrap4.js') ?>"></script>
-<script src="<?= base_url('assets') ?>/js/select2.min.js"></script>
 
 <script>
     $(document).ready(function() {
@@ -68,11 +68,6 @@
                 var index = page * length + (iDisplayIndex + 1);
                 $('td:eq(0)', row).html(index);
             }
-        });
-
-        $('#role').select2({
-            minimumResultsForSearch: -1,
-            placeholder: "Pilih Role"
         });
     });
 </script>
