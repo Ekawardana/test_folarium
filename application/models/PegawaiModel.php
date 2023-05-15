@@ -6,7 +6,7 @@ if (!defined('BASEPATH'))
 class PegawaiModel extends CI_Model
 {
     public $table = 'pegawai';
-    public $id = 'id_pegawai';
+    public $id = 'id';
     public $order = 'DESC';
 
     function __construct()
@@ -17,7 +17,7 @@ class PegawaiModel extends CI_Model
     // datatables
     function json()
     {
-        $this->datatables->select('id_pegawai, nama, alamat, gaji');
+        $this->datatables->select('id, nama, alamat, gaji');
         $this->datatables->from('pegawai');
         $this->datatables->add_column(
             'action',
@@ -28,7 +28,7 @@ class PegawaiModel extends CI_Model
                 form_open('master/Pegawai/delete/$1') .
                 form_button(['type' => 'submit', 'title' => 'Hapus', 'class' => 'btn btn-danger'], '<i class="fas fa-trash-alt"> </i>', 'onclick="javascript: return confirm(\'Yakin ingin hapus ?\')"') .
                 form_close() . '</div>',
-            'id_pegawai'
+            'id'
         );
         return $this->datatables->generate();
     }
@@ -50,7 +50,7 @@ class PegawaiModel extends CI_Model
     // get total rows
     function total_rows($q = NULL)
     {
-        $this->db->like('id_pegawai', $q);
+        $this->db->like('id', $q);
         $this->db->or_like('nama', $q);
         $this->db->or_like('alamat', $q);
         $this->db->or_like('gaji', $q);
@@ -62,7 +62,7 @@ class PegawaiModel extends CI_Model
     function get_limit_data($limit, $start = 0, $q = NULL)
     {
         $this->db->order_by($this->id, $this->order);
-        $this->db->like('id_pegawai', $q);
+        $this->db->like('id', $q);
         $this->db->or_like('nama', $q);
         $this->db->or_like('alamat', $q);
         $this->db->or_like('gaji', $q);

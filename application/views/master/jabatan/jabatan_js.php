@@ -44,7 +44,7 @@
                 type: "POST"
             },
             columns: [{
-                    "data": "id",
+                    "data": "id_jab",
                     "orderable": false,
                     "width": "20px"
                 },

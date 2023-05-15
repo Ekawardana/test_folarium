@@ -36,7 +36,7 @@ class Jabatan extends CI_Controller
         $data = array(
             'button' => 'Tambah',
             'action' => site_url('master/Jabatan/add_action'),
-            'id'     => set_value('id'),
+            'id_jab'  => set_value('id_jab'),
             'jabatan' => set_value('jabatan'),
         );
 
@@ -74,7 +74,7 @@ class Jabatan extends CI_Controller
             $data = array(
                 'button' => 'Edit',
                 'action' => site_url('master/jabatan/update_action'),
-                'id'   => set_value('id',  $byid->id),
+                'id_jab'   => set_value('id_jab',  $byid->id_jab),
                 'jabatan' => set_value('jabatan', $byid->jabatan),
             );
             $data['title'] = 'Jabatan';
@@ -89,8 +89,8 @@ class Jabatan extends CI_Controller
     }
     public function update_action()
     {
-        $id = $this->input->post('id', TRUE);
-        $jabatan_awal = $this->db->get_where('jabatan', ['id' => $id])->row_array()['jabatan'];
+        $id = $this->input->post('id_jab', TRUE);
+        $jabatan_awal = $this->db->get_where('jabatan', ['id_jab' => $id])->row_array()['jabatan'];
 
         if (trim($this->input->post('jabatan')) != $jabatan_awal) {
             $is_unique =  '|is_unique[jabatan.jabatan]';
@@ -101,13 +101,13 @@ class Jabatan extends CI_Controller
         $this->form_validation->set_rules('jabatan', 'Jabatan', 'trim|required' . $is_unique);
         $this->_rules();
         if ($this->form_validation->run() == false) {
-            $this->update($this->input->post('id', true));
+            $this->update($this->input->post('id_jab', true));
         } else {
             $data = array(
                 'jabatan' => ucwords($this->input->post('jabatan', TRUE)),
             );
 
-            $this->JabatanModel->update($this->input->post('id', TRUE), $data);
+            $this->JabatanModel->update($this->input->post('id_jab', TRUE), $data);
             $this->session->set_flashdata('message', 'di Edit.');
             redirect(site_url('master/Jabatan'));
         }
@@ -133,8 +133,8 @@ class Jabatan extends CI_Controller
         $this->form_validation->set_message('required', '%s tidak boleh kosong.');
 
         // set rules
-        $this->form_validation->set_rules('id', 'id', 'trim');
-        $this->form_validation->set_rules('jabatan', 'jabatan', 'required');
+        $this->form_validation->set_rules('id_jab', 'ID_jab', 'trim');
+        $this->form_validation->set_rules('jabatan', 'Jabatan', 'required');
         $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }
 }

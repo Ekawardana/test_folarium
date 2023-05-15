@@ -18,7 +18,7 @@
                                     <?= form_error('jabatan') ?>
                                 </div>
 
-                                <input type="hidden" name="id" value="<?= $id; ?>" />
+                                <input type="hidden" name="id_jab" value="<?= $id_jab; ?>" />
                                 <div class="text-right">
                                     <button type="submit" class="btn btn-primary">
                                         <i class="fas fa-<?= $button == "Tambah" ? "plus" : "pencil-alt" ?>">

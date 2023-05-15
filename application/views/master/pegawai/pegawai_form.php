@@ -19,16 +19,17 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="varchar">Alamat</label>
-                                    <textarea class="form-control" name="alamat" placeholder="Masukan Alamat..." id="alamat" value="<?= $alamat; ?>"></textarea>
+                                    <textarea class="form-control" name="alamat" placeholder="Masukan Alamat..." id="alamat"><?= $alamat; ?></textarea>
                                     <?= form_error('alamat') ?>
                                 </div>
+
                                 <div class="form-group">
                                     <label for="varchar">Gaji</label>
                                     <input type="number" class="form-control" name="gaji" placeholder="Masukan gaji..." id="gaji" value="<?= $gaji; ?>" />
                                     <?= form_error('gaji') ?>
                                 </div>
 
-                                <input type="hidden" name="id_pegawai" value="<?= $id_pegawai; ?>" />
+                                <input type="hidden" name="id" value="<?= $id; ?>" />
                                 <div class="text-right">
                                     <button type="submit" class="btn btn-primary">
                                         <i class="fas fa-<?= $button == "Tambah" ? "plus" : "pencil-alt" ?>">

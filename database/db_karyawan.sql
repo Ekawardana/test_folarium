@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 15, 2023 at 01:14 AM
--- Server version: 10.4.25-MariaDB
--- PHP Version: 8.1.10
+-- Generation Time: May 15, 2023 at 10:29 AM
+-- Server version: 10.4.21-MariaDB
+-- PHP Version: 8.0.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,18 +28,18 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `jabatan` (
-  `id` int(11) NOT NULL,
-  `jabatan` varchar(50) NOT NULL
+  `id_jab` int(11) NOT NULL,
+  `jabatan` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `jabatan`
 --
 
-INSERT INTO `jabatan` (`id`, `jabatan`) VALUES
-(1, 'Manager'),
+INSERT INTO `jabatan` (`id_jab`, `jabatan`) VALUES
+(1, 'Manajer'),
 (2, 'Office Boy'),
-(3, 'Sistem Analis');
+(3, 'WEB Developer');
 
 -- --------------------------------------------------------
 
@@ -48,7 +48,7 @@ INSERT INTO `jabatan` (`id`, `jabatan`) VALUES
 --
 
 CREATE TABLE `kontrak` (
-  `id` int(11) NOT NULL,
+  `id_kontrak` int(11) NOT NULL,
   `id_pegawai` int(11) NOT NULL,
   `tgl_masuk` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -57,11 +57,9 @@ CREATE TABLE `kontrak` (
 -- Dumping data for table `kontrak`
 --
 
-INSERT INTO `kontrak` (`id`, `id_pegawai`, `tgl_masuk`) VALUES
-(1, 1, '2023-04-23 00:00:00'),
+INSERT INTO `kontrak` (`id_kontrak`, `id_pegawai`, `tgl_masuk`) VALUES
 (2, 2, '2023-05-22 00:00:00'),
 (3, 3, '0000-00-00 00:00:00'),
-(4, 11, '2023-05-15 06:01:13'),
 (5, 12, '2023-05-15 06:02:20');
 
 -- --------------------------------------------------------
@@ -71,7 +69,7 @@ INSERT INTO `kontrak` (`id`, `id_pegawai`, `tgl_masuk`) VALUES
 --
 
 CREATE TABLE `pegawai` (
-  `id_pegawai` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `nama` varchar(100) NOT NULL,
   `alamat` varchar(255) NOT NULL,
   `gaji` int(10) NOT NULL
@@ -81,12 +79,10 @@ CREATE TABLE `pegawai` (
 -- Dumping data for table `pegawai`
 --
 
-INSERT INTO `pegawai` (`id_pegawai`, `nama`, `alamat`, `gaji`) VALUES
-(1, 'Bambang Gunawan', 'Bogor, Jawa Barat', 10000000),
+INSERT INTO `pegawai` (`id`, `nama`, `alamat`, `gaji`) VALUES
 (2, 'Muhammad Abdul ', 'Tangerang, Banten', 2000000),
 (3, 'Eka', 'Bogor', 2000000),
-(11, 'Ahmad', 'Bogor', 1000000),
-(12, 'Surya Intan', 'Dramaga, Bogor', 11000000);
+(12, 'Surya Intan', 'Bogor', 1100000);
 
 --
 -- Triggers `pegawai`
@@ -135,20 +131,20 @@ INSERT INTO `user` (`id`, `name`, `email`, `password`) VALUES
 -- Indexes for table `jabatan`
 --
 ALTER TABLE `jabatan`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id_jab`);
 
 --
 -- Indexes for table `kontrak`
 --
 ALTER TABLE `kontrak`
-  ADD PRIMARY KEY (`id`),
+  ADD PRIMARY KEY (`id_kontrak`),
   ADD KEY `id_pegawai` (`id_pegawai`);
 
 --
 -- Indexes for table `pegawai`
 --
 ALTER TABLE `pegawai`
-  ADD PRIMARY KEY (`id_pegawai`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `user`
@@ -164,19 +160,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `jabatan`
 --
 ALTER TABLE `jabatan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_jab` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `kontrak`
 --
 ALTER TABLE `kontrak`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_kontrak` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `pegawai`
 --
 ALTER TABLE `pegawai`
-  MODIFY `id_pegawai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `user`
@@ -192,7 +188,7 @@ ALTER TABLE `user`
 -- Constraints for table `kontrak`
 --
 ALTER TABLE `kontrak`
-  ADD CONSTRAINT `kontrak_ibfk_1` FOREIGN KEY (`id_pegawai`) REFERENCES `pegawai` (`id_pegawai`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `kontrak_ibfk_1` FOREIGN KEY (`id_pegawai`) REFERENCES `pegawai` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

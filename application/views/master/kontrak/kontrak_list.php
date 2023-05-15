@@ -21,7 +21,8 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Pegawai</th>
+                                            <th>ID Pegawai</th>
+                                            <th>Nama Pegawai</th>
                                         </tr>
                                     </thead>
                                     <tbody>

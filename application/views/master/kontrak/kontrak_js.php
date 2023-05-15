@@ -44,12 +44,15 @@
                 type: "POST"
             },
             columns: [{
-                    "data": "id",
+                    "data": "id_kontrak",
                     "orderable": false,
                     "width": "20px"
                 },
                 {
                     "data": "id_pegawai"
+                },
+                {
+                    "data": "nama"
                 },
             ],
             order: [
