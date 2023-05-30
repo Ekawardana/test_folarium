@@ -18,6 +18,7 @@
 
         <script src="<?= base_url('assets') ?>/js/scripts.js"></script>
         <script src="<?= base_url('assets') ?>/js/custom.js"></script>
+        <script src="<?= base_url('assets') ?>/js/select2.min.js"></script>
 
 
         <!-- Sweetalert2 -->

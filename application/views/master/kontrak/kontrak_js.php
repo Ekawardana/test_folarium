@@ -49,10 +49,13 @@
                     "width": "20px"
                 },
                 {
-                    "data": "id_pegawai"
+                    "data": "pegawai_id"
                 },
                 {
                     "data": "nama"
+                },
+                {
+                    "data": "tgl_masuk"
                 },
             ],
             order: [

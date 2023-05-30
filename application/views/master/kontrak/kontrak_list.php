@@ -23,6 +23,7 @@
                                             <th>No</th>
                                             <th>ID Pegawai</th>
                                             <th>Nama Pegawai</th>
+                                            <th>Tanggal Masuk</th>
                                         </tr>
                                     </thead>
                                     <tbody>

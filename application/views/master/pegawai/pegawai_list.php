@@ -25,6 +25,7 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Nama</th>
+                                            <th>Jabatan</th>
                                             <th>Alamat</th>
                                             <th>Gaji</th>
                                             <th>Action</th>

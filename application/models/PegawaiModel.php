@@ -6,7 +6,7 @@ if (!defined('BASEPATH'))
 class PegawaiModel extends CI_Model
 {
     public $table = 'pegawai';
-    public $id = 'id';
+    public $id = 'id_pegawai';
     public $order = 'DESC';
 
     function __construct()
@@ -17,8 +17,18 @@ class PegawaiModel extends CI_Model
     // datatables
     function json()
     {
-        $this->datatables->select('id, nama, alamat, gaji');
-        $this->datatables->from('pegawai');
+        $this->datatables->select(
+            '
+        p.id_pegawai, 
+        p.nama, 
+        jab.jabatan, 
+        p.alamat, 
+        p.gaji
+        '
+        );
+        $this->datatables->from('pegawai p');
+        $this->datatables->join('jabatan jab', 'jab.id_jab = p.jab_id');
+        $this->datatables->group_by('p.id_pegawai');
         $this->datatables->add_column(
             'action',
             '<div class="btn-group">' .
@@ -28,7 +38,7 @@ class PegawaiModel extends CI_Model
                 form_open('master/Pegawai/delete/$1') .
                 form_button(['type' => 'submit', 'title' => 'Hapus', 'class' => 'btn btn-danger'], '<i class="fas fa-trash-alt"> </i>', 'onclick="javascript: return confirm(\'Yakin ingin hapus ?\')"') .
                 form_close() . '</div>',
-            'id'
+            'id_pegawai'
         );
         return $this->datatables->generate();
     }
@@ -50,9 +60,10 @@ class PegawaiModel extends CI_Model
     // get total rows
     function total_rows($q = NULL)
     {
-        $this->db->like('id', $q);
+        $this->db->like('id_pegawai', $q);
         $this->db->or_like('nama', $q);
         $this->db->or_like('alamat', $q);
+        $this->db->or_like('jab_id', $q);
         $this->db->or_like('gaji', $q);
         $this->db->from($this->table);
         return $this->db->count_all_results();
@@ -62,9 +73,10 @@ class PegawaiModel extends CI_Model
     function get_limit_data($limit, $start = 0, $q = NULL)
     {
         $this->db->order_by($this->id, $this->order);
-        $this->db->like('id', $q);
+        $this->db->like('id_pegawai', $q);
         $this->db->or_like('nama', $q);
         $this->db->or_like('alamat', $q);
+        $this->db->or_like('jab_id', $q);
         $this->db->or_like('gaji', $q);
         $this->db->limit($limit, $start);
         return $this->db->get($this->table)->result();

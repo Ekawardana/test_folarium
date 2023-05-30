@@ -137,4 +137,47 @@ class Jabatan extends CI_Controller
         $this->form_validation->set_rules('jabatan', 'Jabatan', 'required');
         $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }
+
+
+    // jabatan untuk select2 di form edit jabatan
+    public function getJabatan()
+    {
+        $search         = trim($this->input->post('search'));
+        $page           = $this->input->post('page');
+        $resultCount    = 5; //perPage
+        $offset         = ($page - 1) * $resultCount;
+
+        // total data yg sudah terfilter
+        $count = $this->db
+            ->like('jabatan', $search)
+            ->from('jabatan')
+            ->count_all_results();
+
+        // tampilkan data per page
+        $get = $this->db
+            ->select('id_jab, jabatan')
+            ->like('jabatan', $search)
+            ->get('jabatan', $resultCount, $offset)
+            ->result_array();
+
+        $endCount = $offset + $resultCount;
+
+        $morePages = $endCount < $count ? true : false;
+
+        $data = [];
+        $key    = 0;
+        foreach ($get as $jabatan) {
+            $data[$key]['jab_id']   = $jabatan['id_jab'];
+            $data[$key]['text'] = ucwords($jabatan['jabatan']);
+            $key++;
+        }
+        $result = [
+            "results"        => $data,
+            "count_filtered" => $count,
+            "pagination"     => [
+                "more" => $morePages
+            ]
+        ];
+        echo json_encode($result);
+    }
 }
