@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 15, 2023 at 10:29 AM
+-- Generation Time: May 30, 2023 at 06:51 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.11
 
@@ -39,7 +39,7 @@ CREATE TABLE `jabatan` (
 INSERT INTO `jabatan` (`id_jab`, `jabatan`) VALUES
 (1, 'Manajer'),
 (2, 'Office Boy'),
-(3, 'WEB Developer');
+(3, 'Web Developer');
 
 -- --------------------------------------------------------
 
@@ -49,7 +49,7 @@ INSERT INTO `jabatan` (`id_jab`, `jabatan`) VALUES
 
 CREATE TABLE `kontrak` (
   `id_kontrak` int(11) NOT NULL,
-  `id_pegawai` int(11) NOT NULL,
+  `pegawai_id` int(11) NOT NULL,
   `tgl_masuk` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -57,10 +57,10 @@ CREATE TABLE `kontrak` (
 -- Dumping data for table `kontrak`
 --
 
-INSERT INTO `kontrak` (`id_kontrak`, `id_pegawai`, `tgl_masuk`) VALUES
-(2, 2, '2023-05-22 00:00:00'),
-(3, 3, '0000-00-00 00:00:00'),
-(5, 12, '2023-05-15 06:02:20');
+INSERT INTO `kontrak` (`id_kontrak`, `pegawai_id`, `tgl_masuk`) VALUES
+(1, 1, '2023-05-30 11:46:40'),
+(2, 2, '2023-05-30 11:47:17'),
+(3, 3, '2023-05-30 11:48:45');
 
 -- --------------------------------------------------------
 
@@ -69,8 +69,9 @@ INSERT INTO `kontrak` (`id_kontrak`, `id_pegawai`, `tgl_masuk`) VALUES
 --
 
 CREATE TABLE `pegawai` (
-  `id` int(11) NOT NULL,
+  `id_pegawai` int(11) NOT NULL,
   `nama` varchar(100) NOT NULL,
+  `jab_id` int(11) NOT NULL,
   `alamat` varchar(255) NOT NULL,
   `gaji` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -79,27 +80,23 @@ CREATE TABLE `pegawai` (
 -- Dumping data for table `pegawai`
 --
 
-INSERT INTO `pegawai` (`id`, `nama`, `alamat`, `gaji`) VALUES
-(2, 'Muhammad Abdul ', 'Tangerang, Banten', 2000000),
-(3, 'Eka', 'Bogor', 2000000),
-(12, 'Surya Intan', 'Bogor', 1100000);
+INSERT INTO `pegawai` (`id_pegawai`, `nama`, `jab_id`, `alamat`, `gaji`) VALUES
+(1, 'Eka Wardana', 3, 'Bogor', 900000),
+(3, 'Surya Intan', 1, 'Bogor', 200000);
 
 --
 -- Triggers `pegawai`
 --
 DELIMITER $$
-CREATE TRIGGER `trigger_insert_pegawai` AFTER INSERT ON `pegawai` FOR EACH ROW BEGIN 
-INSERT INTO kontrak (
-id,
-id_pegawai
+CREATE TRIGGER `trigger_insert_pegawai` AFTER INSERT ON `pegawai` FOR EACH ROW INSERT INTO kontrak (
+id_kontrak,
+pegawai_id
 )
 
 VALUES (
 null,
 NEW.id_pegawai
-);
-
-END
+)
 $$
 DELIMITER ;
 
@@ -138,13 +135,15 @@ ALTER TABLE `jabatan`
 --
 ALTER TABLE `kontrak`
   ADD PRIMARY KEY (`id_kontrak`),
-  ADD KEY `id_pegawai` (`id_pegawai`);
+  ADD UNIQUE KEY `pegawai_id` (`pegawai_id`),
+  ADD KEY `id_pegawai` (`pegawai_id`);
 
 --
 -- Indexes for table `pegawai`
 --
 ALTER TABLE `pegawai`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id_pegawai`),
+  ADD KEY `jab_id` (`jab_id`);
 
 --
 -- Indexes for table `user`
@@ -166,29 +165,19 @@ ALTER TABLE `jabatan`
 -- AUTO_INCREMENT for table `kontrak`
 --
 ALTER TABLE `kontrak`
-  MODIFY `id_kontrak` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_kontrak` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `pegawai`
 --
 ALTER TABLE `pegawai`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_pegawai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `kontrak`
---
-ALTER TABLE `kontrak`
-  ADD CONSTRAINT `kontrak_ibfk_1` FOREIGN KEY (`id_pegawai`) REFERENCES `pegawai` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
